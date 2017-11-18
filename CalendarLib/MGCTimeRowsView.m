@@ -37,6 +37,7 @@
 
 @property (nonatomic) NSTimer *timer;
 @property (nonatomic) NSUInteger rounding;
+@property (nonatomic) NSDateFormatter *dateFormatter;
 
 @end
 
@@ -52,13 +53,13 @@
 		_hourSlotHeight = 65;
 		_insetsHeight = 45;
 		_timeColumnWidth = 40;
-		_font = [UIFont boldSystemFontOfSize:12];
+		_font = [UIFont boldSystemFontOfSize:10];
 		_timeColor = [UIColor lightGrayColor];
 		_currentTimeColor = [UIColor redColor];
 		_rounding = 15;
 		_hourRange = NSMakeRange(0, 24);
 		
-		self.showsCurrentTime = YES;
+		self.showsCurrentTime = NO;
 	}
 	return self;
 }
@@ -117,10 +118,26 @@
 	int hour = (int)(time / 3600) % 24;
 	int minutes = ((int)time % 3600) / 60;
 
-	if (minutesOnly) {
-		return [NSString stringWithFormat:@":%02d", minutes];
-	}
-	return [NSString stringWithFormat:@"%02d:%02d", hour, minutes];
+//    if (minutesOnly) {
+//        return [NSString stringWithFormat:@":%02d", minutes];
+//    }
+//    return [NSString stringWithFormat:@"%02d:%02d", hour, minutes];
+    
+    if (hour > 12) {
+        return [NSString stringWithFormat:@"%d PM", hour % 12];
+    }
+    else {
+        return  [NSString stringWithFormat:@"%d AM", hour];
+    }
+    
+}
+
+- (NSDateFormatter *)dateFormatter {
+    if (_dateFormatter == nil) {
+        _dateFormatter = [[NSDateFormatter alloc] init];
+        _dateFormatter.dateFormat = @"H a";
+    }
+    return _dateFormatter;
 }
 
 - (NSAttributedString*)attributedStringForTimeMark:(MGCDayPlannerTimeMark)mark time:(NSTimeInterval)ti
