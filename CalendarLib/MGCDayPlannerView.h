@@ -159,6 +159,13 @@ typedef NS_ENUM(NSUInteger, MGCDayPlannerCoveringType) {
 @property (nonatomic) BOOL showsAllDayEvents;
 
 /*!
+ @abstract    Determines whether the day planner view shows current time.
+ @discussion If the value of this property is YES, the view hide current time in time rows view
+ The default value is YES.
+ */
+@property (nonatomic) BOOL showsCurrentTime;
+
+/*!
 	@abstract	The view that provides the background appearance.
 	@discussion The view (if any) in this property is positioned underneath all of the other content 
 				and sized automatically to fill the entire bounds of the day planner view.

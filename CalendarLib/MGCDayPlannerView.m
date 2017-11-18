@@ -184,6 +184,7 @@ static const CGFloat kMaxHourSlotHeight = 150.;
     _currentTimeColor = [UIColor redColor];
     _eventIndicatorDotColor = [UIColor blueColor];
 	_showsAllDayEvents = YES;
+    _showsCurrentTime = YES;
     _eventsViewInnerMargin = 15.;
 	_allDayEventCellHeight = 20;
     _dimmingColor = [UIColor colorWithWhite:.9 alpha:.5];
@@ -1679,7 +1680,9 @@ static const CGFloat kMaxHourSlotHeight = 150.;
 		[self addSubview:self.timeScrollView];
 	}
 	
-	self.timeRowsView.showsCurrentTime = [self.visibleDays containsDate:[NSDate date]];
+    if (self.showsCurrentTime) {
+        self.timeRowsView.showsCurrentTime = [self.visibleDays containsDate:[NSDate date]];
+    }
 	
     self.timeScrollView.userInteractionEnabled = NO;
     
