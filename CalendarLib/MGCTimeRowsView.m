@@ -53,7 +53,7 @@
 		_hourSlotHeight = 65;
 		_insetsHeight = 45;
 		_timeColumnWidth = 40;
-		_font = [UIFont boldSystemFontOfSize:10];
+		_font = [UIFont boldSystemFontOfSize:8];
 		_timeColor = [UIColor lightGrayColor];
 		_currentTimeColor = [UIColor redColor];
 		_rounding = 15;
@@ -124,10 +124,10 @@
 //    return [NSString stringWithFormat:@"%02d:%02d", hour, minutes];
     
     if (hour > 12) {
-        return [NSString stringWithFormat:@"%d PM", hour % 12];
+        return [NSString stringWithFormat:@"%dPM", hour % 12];
     }
     else {
-        return  [NSString stringWithFormat:@"%d AM", hour];
+        return  [NSString stringWithFormat:@"%dAM", hour];
     }
     
 }
@@ -155,7 +155,8 @@
         NSString *str = [self stringForTime:ti rounded:rounded minutesOnly:minutesOnly];
     
         NSMutableParagraphStyle *style = [NSMutableParagraphStyle new];
-        style.alignment = NSTextAlignmentRight;
+//        style.alignment = NSTextAlignmentRight;
+        style.alignment = NSTextAlignmentCenter;
         
         UIColor *foregroundColor = (mark == MGCDayPlannerTimeMarkCurrent ? self.currentTimeColor : self.timeColor);
         attrStr = [[NSAttributedString alloc]initWithString:str attributes:@{ NSFontAttributeName: self.font, NSForegroundColorAttributeName: foregroundColor, NSParagraphStyleAttributeName: style }];
@@ -171,7 +172,7 @@
 
 - (void)drawRect:(CGRect)rect
 {
-	const CGFloat kSpacing = 5.;
+	const CGFloat kSpacing = 3.;
 	const CGFloat dash[2]= {2, 3};
     
 	CGContextRef context = UIGraphicsGetCurrentContext();
@@ -209,12 +210,16 @@
     
 	// draw the hour marks
 	for (NSUInteger i = self.hourRange.location; i <=  NSMaxRange(self.hourRange); i++) {
+        if (i == 0 || i == 24) {
+            continue;
+        }
 		
         markAttrStr = [self attributedStringForTimeMark:MGCDayPlannerTimeMarkHeader time:(i % 24)*3600];
         markSize = [markAttrStr boundingRectWithSize:markSizeMax options:NSStringDrawingUsesLineFragmentOrigin context:nil].size;
         
         y = MGCAlignedFloat((i - self.hourRange.location) * self.hourSlotHeight + self.insetsHeight) - lineWidth * .5;
-		CGRect r = MGCAlignedRectMake(kSpacing, y - markSize.height / 2., markSizeMax.width, markSize.height);
+//        CGRect r = MGCAlignedRectMake(kSpacing, y - markSize.height / 2., markSizeMax.width, markSize.height);
+        CGRect r = MGCAlignedRectMake(kSpacing, y - markSize.height - kSpacing, markSizeMax.width, markSize.height);
 
 		if (!CGRectIntersectsRect(r, rectCurTime) || !self.showsCurrentTime) {
             [markAttrStr drawInRect:r];
@@ -223,8 +228,10 @@
         CGContextSetStrokeColorWithColor(context, self.timeColor.CGColor);
         CGContextSetLineWidth(context, lineWidth);
 		CGContextSetLineDash(context, 0, NULL, 0);
-        CGContextMoveToPoint(context, self.timeColumnWidth, y);
-		CGContextAddLineToPoint(context, self.timeColumnWidth + rect.size.width, y);
+//        CGContextMoveToPoint(context, self.timeColumnWidth, y);
+//        CGContextAddLineToPoint(context, self.timeColumnWidth + rect.size.width, y);
+        CGContextMoveToPoint(context, 0, y);
+        CGContextAddLineToPoint(context, rect.size.width, y);
 		CGContextStrokePath(context);
 		
 		if (self.showsHalfHourLines && i < NSMaxRange(self.hourRange)) {
