@@ -54,7 +54,7 @@
 		_insetsHeight = 45;
 		_timeColumnWidth = 40;
 		_font = [UIFont boldSystemFontOfSize:8];
-		_timeColor = [UIColor lightGrayColor];
+		_timeColor = [UIColor blackColor];
 		_currentTimeColor = [UIColor redColor];
 		_rounding = 15;
 		_hourRange = NSMakeRange(0, 24);

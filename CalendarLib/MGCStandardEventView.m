@@ -125,13 +125,15 @@ static CGFloat kSpace = 2;
 {
 	self.leftBorderView.backgroundColor = self.color;
 	
-	if (self.selected)
-		self.backgroundColor = self.selected ? self.color : [self.color colorWithAlphaComponent:.3];
-	else if (self.style & MGCStandardEventViewStylePlain)
-		self.backgroundColor = [self.color colorWithAlphaComponent:.3];
-	else
-		self.backgroundColor = [UIColor clearColor];
+//    if (self.selected)
+//        self.backgroundColor = self.selected ? self.color : [self.color colorWithAlphaComponent:.3];
+//    else if (self.style & MGCStandardEventViewStylePlain)
+//        self.backgroundColor = [self.color colorWithAlphaComponent:.3];
+//    else
+//        self.backgroundColor = [UIColor clearColor];
 	
+    self.backgroundColor = self.color;
+    
 	[self setNeedsDisplay];
 }
 

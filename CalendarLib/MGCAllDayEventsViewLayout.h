@@ -32,6 +32,7 @@
 
 
 static NSString* const MoreEventsViewKind = @"MoreEventsViewKind";
+static NSString* const EventsHeaderViewKind = @"EventsHeaderViewKind";
 
 typedef enum : NSUInteger
 {

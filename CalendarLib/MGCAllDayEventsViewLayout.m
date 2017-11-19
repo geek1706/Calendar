@@ -173,6 +173,7 @@ static const CGFloat kCellInset = 4.;
     
 	NSMutableDictionary *cellInfos = [NSMutableDictionary dictionary];
 	NSMutableDictionary *moreInfos = [NSMutableDictionary dictionary];
+    NSMutableDictionary *headerInfos = [NSMutableDictionary dictionary];
 
 	NSDictionary *eventRanges = [self eventRanges];
 	NSMutableArray *lines = [NSMutableArray new];
@@ -235,7 +236,23 @@ static const CGFloat kCellInset = 4.;
 			[moreInfos setObject:attribs forKey:path];
 		}
 	}
-	
+    
+// Create header view
+//    CGPoint const contentOffset = self.collectionView.contentOffset;
+//    CGSize headerSize = CGSizeMake(30, 25);
+//
+//    //create new layout attributes for header
+//    NSIndexPath *path = [NSIndexPath indexPathForItem:0 inSection:0];
+//    UICollectionViewLayoutAttributes *headerAttributes = [UICollectionViewLayoutAttributes layoutAttributesForSupplementaryViewOfKind:EventsHeaderViewKind withIndexPath:path];
+//    CGFloat x = MAX(0, contentOffset.x) - headerSize.width;
+//    CGRect frame = CGRectMake(x, contentOffset.y, headerSize.width, headerSize.height);  //offset y by the amount scrolled
+//    headerAttributes.frame = frame;
+//    headerAttributes.zIndex = 1024;
+//
+//    [headerInfos setObject:headerAttributes forKey:path];
+//
+//    [self.layoutInfos setObject:headerInfos forKey:@"headerInfos"];
+    
 	[self.layoutInfos setObject:cellInfos forKey:@"cellInfos"];
 	[self.layoutInfos setObject:moreInfos forKey:@"moreInfos"];
 }

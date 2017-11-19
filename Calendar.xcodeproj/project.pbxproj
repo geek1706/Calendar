@@ -33,6 +33,7 @@
 		72EF07FF1A3D9DF8005699CA /* WeekViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72EF07FE1A3D9DF8005699CA /* WeekViewController.m */; };
 		72EF08151A3DB8C6005699CA /* MonthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72EF080C1A3DB8C6005699CA /* MonthViewController.m */; };
 		72EF08181A3DB8C6005699CA /* YearViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72EF080E1A3DB8C6005699CA /* YearViewController.m */; };
+		938508841FC031E500A7C129 /* MGCDayColumnCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 938508831FC031E500A7C129 /* MGCDayColumnCell.xib */; };
 		96A3FD1C9E6707E46CB36A87 /* Pods_CalendarDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F06A59852B476A0AA324A957 /* Pods_CalendarDemo.framework */; };
 		BC32A4601D30FED600AB19D7 /* DayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC32A45F1D30FED600AB19D7 /* DayViewController.m */; };
 		BC32A4681D3101BB00AB19D7 /* MGCCalendarHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC32A4671D3101BB00AB19D7 /* MGCCalendarHeaderCell.xib */; };
@@ -157,6 +158,7 @@
 		72EF080C1A3DB8C6005699CA /* MonthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MonthViewController.m; sourceTree = "<group>"; };
 		72EF080D1A3DB8C6005699CA /* YearViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YearViewController.h; sourceTree = "<group>"; };
 		72EF080E1A3DB8C6005699CA /* YearViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YearViewController.m; sourceTree = "<group>"; };
+		938508831FC031E500A7C129 /* MGCDayColumnCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MGCDayColumnCell.xib; sourceTree = "<group>"; };
 		BC32A45E1D30FED500AB19D7 /* DayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DayViewController.h; sourceTree = "<group>"; };
 		BC32A45F1D30FED600AB19D7 /* DayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DayViewController.m; sourceTree = "<group>"; };
 		BC32A4611D31003C00AB19D7 /* MGCCalendarHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGCCalendarHeaderView.h; sourceTree = "<group>"; };
@@ -248,6 +250,7 @@
 				BC32A4671D3101BB00AB19D7 /* MGCCalendarHeaderCell.xib */,
 				724E03C4183F8F6A00490FC5 /* MGCDayColumnCell.h */,
 				724E03C5183F8F6A00490FC5 /* MGCDayColumnCell.m */,
+				938508831FC031E500A7C129 /* MGCDayColumnCell.xib */,
 				72B5D92C180D7840004ADB86 /* MGCEventCell.h */,
 				72B5D92D180D7840004ADB86 /* MGCEventCell.m */,
 				7290307C1A5031EF008C58D3 /* MGCTimeRowsView.h */,
@@ -536,6 +539,7 @@
 			files = (
 				720041BA1879B2B600F3C497 /* Settings.bundle in Resources */,
 				72E9B9161C919EF20070EDD3 /* settings.storyboard in Resources */,
+				938508841FC031E500A7C129 /* MGCDayColumnCell.xib in Resources */,
 				BC32A4681D3101BB00AB19D7 /* MGCCalendarHeaderCell.xib in Resources */,
 				7275C4A01C46E87B0036C9A3 /* Launch Screen.storyboard in Resources */,
 				72B5D8FC180D73E0004ADB86 /* InfoPlist.strings in Resources */,
