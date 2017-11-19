@@ -185,7 +185,7 @@ static const CGFloat kMaxHourSlotHeight = 150.;
     _eventIndicatorDotColor = [UIColor blueColor];
 	_showsAllDayEvents = YES;
     _showsCurrentTime = YES;
-    _eventsViewInnerMargin = 15.;
+//    _eventsViewInnerMargin = 15.;
 	_allDayEventCellHeight = 20;
     _dimmingColor = [UIColor colorWithWhite:.9 alpha:.5];
 	_pagingEnabled = YES;
@@ -958,7 +958,7 @@ static const CGFloat kMaxHourSlotHeight = 150.;
 {
 	if (!_allDayEventsBackgroundView) {
 		_allDayEventsBackgroundView = [[UIView alloc] initWithFrame:CGRectZero];
-		_allDayEventsBackgroundView.backgroundColor = [UIColor colorWithRed:.8 green:.8 blue:.83 alpha:1.];
+        _allDayEventsBackgroundView.backgroundColor = [UIColor clearColor];//[UIColor colorWithRed:.8 green:.8 blue:.83 alpha:1.];
 		_allDayEventsBackgroundView.clipsToBounds = YES;
 		_allDayEventsBackgroundView.layer.borderColor = [UIColor lightGrayColor].CGColor;
 		_allDayEventsBackgroundView.layer.borderWidth = 1;
@@ -1823,8 +1823,10 @@ static const CGFloat kMaxHourSlotHeight = 150.;
 
     NSDate *date = [self dateFromDayOffset:indexPath.section];
     
-    NSUInteger weekDay = [self.calendar components:NSCalendarUnitWeekday fromDate:date].weekday;
-    NSUInteger accessoryTypes = weekDay == self.calendar.firstWeekday ? MGCDayColumnCellAccessorySeparator : MGCDayColumnCellAccessoryBorder;
+//    NSUInteger weekDay = [self.calendar components:NSCalendarUnitWeekday fromDate:date].weekday;
+//    NSUInteger accessoryTypes = weekDay == self.calendar.firstWeekday ? MGCDayColumnCellAccessorySeparator : MGCDayColumnCellAccessoryBorder;
+    
+    NSUInteger accessoryTypes = MGCDayColumnCellAccessorySeparator;
     
     NSAttributedString *attrStr = nil;
     if ([self.delegate respondsToSelector:@selector(dayPlannerView:attributedStringForDayHeaderAtDate:)]) {
@@ -1835,29 +1837,44 @@ static const CGFloat kMaxHourSlotHeight = 150.;
         dayCell.dayLabel.attributedText = attrStr;
     }
     else {
-        
         static NSDateFormatter *dateFormatter = nil;
         if (dateFormatter == nil) {
             dateFormatter = [NSDateFormatter new];
+            dateFormatter.locale = [NSLocale localeWithLocaleIdentifier:@"ja"];
         }
-        dateFormatter.dateFormat = self.dateFormat ?: @"d MMM\neeeee";
 
-        NSString *s = [dateFormatter stringFromDate:date];
+        [dateFormatter setDateFormat:@"E"];
+        
+        NSString *day = [dateFormatter stringFromDate:date];
+        
+        [dateFormatter setDateFormat:@"d"];
+        
+        NSString *dayNumber = [dateFormatter stringFromDate:date];
         
         NSMutableParagraphStyle *para = [NSMutableParagraphStyle new];
         para.alignment = NSTextAlignmentCenter;
         
-        UIFont *font = [UIFont systemFontOfSize:14];
-        UIColor *color = [self.calendar isDateInWeekend:date] ? [UIColor lightGrayColor] : [UIColor blackColor];
+//        UIFont *font = [UIFont systemFontOfSize:14];
+//        UIColor *color = [self.calendar isDateInWeekend:date] ? [UIColor lightGrayColor] : [UIColor blackColor];
         
-        if ([self.calendar mgc_isDate:date sameDayAsDate:[NSDate date]]) {
+        if ([self.calendar mgc_isDate:date sameDayAsDate:[NSDate date]]) { // today
             accessoryTypes |= MGCDayColumnCellAccessoryMark;
-            dayCell.markColor = self.tintColor;
-            color = [UIColor whiteColor];
-            font = [UIFont boldSystemFontOfSize:14];
+//            dayCell.markColor = self.tintColor;
+//            color = [UIColor whiteColor];
+//            font = [UIFont boldSystemFontOfSize:14];
         }
         
-        NSAttributedString *as = [[NSAttributedString alloc]initWithString:s attributes:@{ NSParagraphStyleAttributeName: para, NSFontAttributeName: font, NSForegroundColorAttributeName: color }];
+//        NSMutableAttributedString *as = [[NSAttributedString alloc]initWithString:[NSString stringWithFormat:@"%@\n%@",dayNumber, day] attributes:@{ NSParagraphStyleAttributeName: para, NSFontAttributeName: font, NSForegroundColorAttributeName: color }];
+        
+        NSString *s = [NSString stringWithFormat:@"%@\n%@",dayNumber, day];
+        NSMutableAttributedString *as = [[NSMutableAttributedString alloc] initWithString:s];
+        [as addAttributes:@{NSParagraphStyleAttributeName: para} range:NSMakeRange(0, s.length)];
+        
+        NSRange breakStringRange = [s rangeOfString:@"\n"];
+        
+        [as addAttributes:@{NSFontAttributeName : [UIFont boldSystemFontOfSize:16]} range:NSMakeRange(0, breakStringRange.location)];
+        [as addAttributes:@{NSFontAttributeName : [UIFont systemFontOfSize:10], NSForegroundColorAttributeName: [UIColor darkGrayColor]} range:NSMakeRange(breakStringRange.location + breakStringRange.length, 1)];
+        
         dayCell.dayLabel.attributedText = as;
     }
     
