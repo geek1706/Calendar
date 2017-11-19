@@ -327,7 +327,8 @@ static NSString* const EventCellsKey = @"EventCellsKey";
         maxRowCount = fmax(maxRowCount, column.count);
     }
     
-    CGFloat totalWidth = self.dayColumnSize.width - 2.f;
+//    CGFloat totalWidth = self.dayColumnSize.width - 2.f;
+    CGFloat totalWidth = self.dayColumnSize.width;
 
     for (NSInteger i = 0; i < maxRowCount; i++) {
         // Set the x position of the rect
