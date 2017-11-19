@@ -32,7 +32,7 @@
 #import "MGCAlignedGeometry.h"
 
 
-static const CGFloat kCellSpacing = 2.;		// space around cells
+static const CGFloat kCellSpacing = 0.;		// space around cells
 static const CGFloat kCellInset = 4.;
 
 
