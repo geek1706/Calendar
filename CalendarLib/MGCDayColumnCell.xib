@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="MGCDayColumnCell">
+            <rect key="frame" x="0.0" y="0.0" width="61" height="57"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="61" height="57"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jC1-iF-T0J">
+                        <rect key="frame" x="0.0" y="1" width="61" height="3"/>
+                        <color key="backgroundColor" red="0.92941176469999998" green="0.31764705879999999" blue="0.035294117649999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="3" id="dQQ-Rl-I4z"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gZT-Jn-N5N">
+                        <rect key="frame" x="0.0" y="4" width="61" height="28"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="M" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4bo-dV-4uk">
+                        <rect key="frame" x="0.0" y="40" width="61" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="4bo-dV-4uk" secondAttribute="bottom" id="5Qz-Wc-xJ9"/>
+                <constraint firstItem="jC1-iF-T0J" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="B5F-OL-hvx"/>
+                <constraint firstItem="4bo-dV-4uk" firstAttribute="top" secondItem="gZT-Jn-N5N" secondAttribute="bottom" constant="8" symbolic="YES" id="Bk7-y7-9md"/>
+                <constraint firstAttribute="trailing" secondItem="jC1-iF-T0J" secondAttribute="trailing" id="QwP-0L-m05"/>
+                <constraint firstItem="gZT-Jn-N5N" firstAttribute="top" secondItem="jC1-iF-T0J" secondAttribute="bottom" id="WjL-1V-Ocl"/>
+                <constraint firstAttribute="trailing" secondItem="gZT-Jn-N5N" secondAttribute="trailing" id="dt9-Gy-E3Q"/>
+                <constraint firstItem="gZT-Jn-N5N" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="f4s-Tq-9ox"/>
+                <constraint firstAttribute="trailing" secondItem="4bo-dV-4uk" secondAttribute="trailing" id="gvr-eA-bbR"/>
+                <constraint firstItem="jC1-iF-T0J" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="1" id="mCa-HR-y8n"/>
+                <constraint firstItem="4bo-dV-4uk" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="mXh-y1-GeQ"/>
+            </constraints>
+            <size key="customSize" width="61" height="57"/>
+            <connections>
+                <outlet property="dayNameLabel" destination="4bo-dV-4uk" id="aM5-6r-HzX"/>
+                <outlet property="dayNumberLabel" destination="gZT-Jn-N5N" id="xAd-a5-hCD"/>
+                <outlet property="todayIndicatorView" destination="jC1-iF-T0J" id="hi7-2V-Hhp"/>
+            </connections>
+            <point key="canvasLocation" x="-208.5" y="7.5"/>
+        </collectionViewCell>
+    </objects>
+</document>

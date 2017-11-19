@@ -32,6 +32,7 @@
 
 
 static const CGFloat dotSize = 4;
+static const CGFloat todayIndicatorSize = 2;
 
 
 @interface MGCDayColumnCell ()
@@ -39,6 +40,7 @@ static const CGFloat dotSize = 4;
 @property (nonatomic) UIActivityIndicatorView *activityIndicatorView;
 @property (nonatomic) CAShapeLayer *dotLayer;
 @property (nonatomic) CALayer *leftBorder;
+@property (nonatomic) CALayer *todayIndicatorLayer;
 
 @end
 
@@ -70,6 +72,16 @@ static const CGFloat dotSize = 4;
 		
 		_leftBorder = [CALayer layer];
 		[self.contentView.layer addSublayer:_leftBorder];
+        
+//        _todayIndicatorLayer = [CAShapeLayer layer];
+//        CGPathRef indicatorPath = CGPathCreateWithRect(CGRectMake(0, 0, frame.size.width, 4), nil);
+//        _todayIndicatorLayer.path = indicatorPath;
+//        _todayIndicatorLayer.bounds = CGPathGetBoundingBox(indicatorPath);
+//        CGPathRelease(indicatorPath);
+//        _todayIndicatorLayer.fillColor = _markColor.CGColor;
+//        _todayIndicatorLayer.hidden = YES;
+        _todayIndicatorLayer = [CALayer layer];
+        [self.contentView.layer addSublayer:_todayIndicatorLayer];
 	}
     return self;
 }
@@ -110,21 +122,21 @@ static const CGFloat dotSize = 4;
 
 	if (self.headerHeight != 0) {
 		CGSize headerSize = CGSizeMake(self.contentView.bounds.size.width, self.headerHeight);
-		CGSize labelSize = CGSizeMake(headerSize.width - 2*kSpace, headerSize.height - (2 * dotSize + 2 * kSpace));
+		CGSize labelSize = CGSizeMake(headerSize.width - 2*kSpace, headerSize.height - (2 * kSpace));
 		self.dayLabel.frame = (CGRect) { 2, 0, labelSize };
 		
 		self.dotLayer.position = CGPointMake(self.contentView.center.x, headerSize.height - 1.2 * dotSize);
 		self.dotLayer.fillColor = self.dotColor.CGColor;
 		self.activityIndicatorView.center = CGPointMake(self.contentView.center.x, headerSize.height - 1.2 * dotSize);
 		
-		if (self.accessoryTypes & MGCDayColumnCellAccessoryMark) {
-			self.dayLabel.layer.cornerRadius = 6;
-			self.dayLabel.layer.backgroundColor = self.markColor.CGColor;
-		}
-		else  {
-			self.dayLabel.layer.cornerRadius = 0;
-			self.dayLabel.layer.backgroundColor = [UIColor clearColor].CGColor;
-		}
+//        if (self.accessoryTypes & MGCDayColumnCellAccessoryMark) {
+//            self.dayLabel.layer.cornerRadius = 6;
+//            self.dayLabel.layer.backgroundColor = self.markColor.CGColor;
+//        }
+//        else  {
+//            self.dayLabel.layer.cornerRadius = 0;
+//            self.dayLabel.layer.backgroundColor = [UIColor clearColor].CGColor;
+//        }
 	}
 	
 	self.dotLayer.hidden = !(self.accessoryTypes & MGCDayColumnCellAccessoryDot) || self.headerHeight == 0;
@@ -142,7 +154,18 @@ static const CGFloat dotSize = 4;
     self.leftBorder.frame = borderFrame;
     self.leftBorder.borderColor = self.separatorColor.CGColor;
     self.leftBorder.borderWidth = borderFrame.size.width / 2.;
-
+    
+    // today indicator
+    self.todayIndicatorLayer.frame = CGRectMake(0, 2./[UIScreen mainScreen].scale, self.contentView.bounds.size.width, todayIndicatorSize);
+    self.todayIndicatorLayer.borderWidth = self.contentView.bounds.size.width / 2.;
+    
+    if (self.accessoryTypes & MGCDayColumnCellAccessoryMark) {
+        self.todayIndicatorLayer.borderColor = [UIColor redColor].CGColor;
+    }
+    else  {
+        self.todayIndicatorLayer.borderColor = [UIColor clearColor].CGColor;
+    }
+    
 	[CATransaction commit];
 }
 
