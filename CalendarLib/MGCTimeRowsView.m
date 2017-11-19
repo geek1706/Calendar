@@ -158,7 +158,8 @@
 //        style.alignment = NSTextAlignmentRight;
         style.alignment = NSTextAlignmentCenter;
         
-        UIColor *foregroundColor = (mark == MGCDayPlannerTimeMarkCurrent ? self.currentTimeColor : self.timeColor);
+//        UIColor *foregroundColor = (mark == MGCDayPlannerTimeMarkCurrent ? self.currentTimeColor : self.timeColor);
+        UIColor *foregroundColor = [UIColor darkGrayColor];
         attrStr = [[NSAttributedString alloc]initWithString:str attributes:@{ NSFontAttributeName: self.font, NSForegroundColorAttributeName: foregroundColor, NSParagraphStyleAttributeName: style }];
     }
     return attrStr;

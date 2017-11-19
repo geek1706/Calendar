@@ -30,7 +30,7 @@
 
 #import "MGCStandardEventView.h"
 
-static CGFloat kSpace = 2;
+static CGFloat kSpace = 0;
 
 
 @interface MGCStandardEventView ()

@@ -45,6 +45,11 @@
 #import "MGCAllEventsHeaderView.h"
 #import "MGCAllDayEventsBackgroundView.h"
 
+#define UIColorFromRGB(rgbValue) \
+[UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \
+green:((float)((rgbValue & 0x00FF00) >>  8))/255.0 \
+blue:((float)((rgbValue & 0x0000FF) >>  0))/255.0 \
+alpha:1.0]
 
 // used to restrict scrolling to one direction / axis
 typedef enum: NSUInteger
@@ -964,7 +969,7 @@ static const CGFloat kMaxHourSlotHeight = 150.;
 		_allDayEventsBackgroundView = [[MGCAllDayEventsBackgroundView alloc] initWithFrame:CGRectZero];
         _allDayEventsBackgroundView.backgroundColor = [UIColor clearColor];//[UIColor colorWithRed:.8 green:.8 blue:.83 alpha:1.];
 		_allDayEventsBackgroundView.clipsToBounds = YES;
-		_allDayEventsBackgroundView.layer.borderColor = [UIColor lightGrayColor].CGColor;
+        _allDayEventsBackgroundView.layer.borderColor = UIColorFromRGB(0xf1f1f1).CGColor;
 		_allDayEventsBackgroundView.layer.borderWidth = 1;
 	}
 	return _allDayEventsBackgroundView;
