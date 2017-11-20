@@ -29,6 +29,7 @@
 //
 
 #import "MGCStandardEventView.h"
+#import "Constant.h"
 
 static CGFloat kSpace = 0;
 
@@ -36,6 +37,7 @@ static CGFloat kSpace = 0;
 @interface MGCStandardEventView ()
 
 @property (nonatomic) UIView *leftBorderView;
+@property (nonatomic) UIView *rightBorderView;
 @property (nonatomic) NSMutableAttributedString *attrString;
 
 @end
@@ -54,6 +56,10 @@ static CGFloat kSpace = 0;
 		_font = [UIFont systemFontOfSize:[UIFont smallSystemFontSize]];
 		_leftBorderView = [[UIView alloc]initWithFrame:CGRectZero];
 		[self addSubview:_leftBorderView];
+        
+        _rightBorderView = [[UIView alloc]initWithFrame:CGRectZero];
+        _rightBorderView.backgroundColor = UIColorFromRGB(0xf1f1f1);
+        [self addSubview:_rightBorderView];
 	}
     return self;
 }
@@ -94,7 +100,8 @@ static CGFloat kSpace = 0;
 	//style.lineBreakMode = NSLineBreakByTruncatingMiddle;
 	[as addAttribute:NSParagraphStyleAttributeName value:style range:NSMakeRange(0, as.length)];
 	
-	UIColor *color = self.selected ? [UIColor whiteColor] : self.color;
+//    UIColor *color = self.selected ? [UIColor whiteColor] : self.color;
+    UIColor * color = [UIColor whiteColor];
 	[as addAttribute:NSForegroundColorAttributeName value:color range:NSMakeRange(0, as.length)];
 	
 	self.attrString = as;
@@ -105,6 +112,7 @@ static CGFloat kSpace = 0;
 {
 	[super layoutSubviews];
 	self.leftBorderView.frame = CGRectMake(0, 0, 2, self.bounds.size.height);
+    self.rightBorderView.frame = CGRectMake(self.bounds.size.width - 1./[UIScreen mainScreen].scale, 0, 1./[UIScreen mainScreen].scale, self.bounds.size.height);
 	[self setNeedsDisplay];
 }
 
@@ -131,9 +139,8 @@ static CGFloat kSpace = 0;
 //        self.backgroundColor = [self.color colorWithAlphaComponent:.3];
 //    else
 //        self.backgroundColor = [UIColor clearColor];
-	
     self.backgroundColor = self.color;
-    
+	
 	[self setNeedsDisplay];
 }
 

@@ -33,7 +33,7 @@
 
 
 static const CGFloat kCellSpacing = 0.;		// space around cells
-static const CGFloat kCellInset = 4.;
+static const CGFloat kCellInset = 1.;
 
 
 @interface MGCAllDayEventsViewLayout ()

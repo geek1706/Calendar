@@ -1642,7 +1642,7 @@ static const CGFloat kMaxHourSlotHeight = 150.;
 {
     CGFloat allDayEventsViewHeight = 2;
 	if (self.showsAllDayEvents) {
-		allDayEventsViewHeight = fmaxf(self.allDayEventCellHeight + 4, self.allDayEventsView.contentSize.height);
+		allDayEventsViewHeight = fmaxf(self.allDayEventCellHeight, self.allDayEventsView.contentSize.height);
 		allDayEventsViewHeight = fminf(allDayEventsViewHeight, self.allDayEventCellHeight * 2.5 + 6);
 	}
 	CGFloat timedEventViewTop = self.dayHeaderHeight + allDayEventsViewHeight;
