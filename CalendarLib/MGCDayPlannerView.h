@@ -574,6 +574,8 @@ typedef NS_ENUM(NSUInteger, MGCDayPlannerCoveringType) {
 
 @optional
 
+- (void)dayPlannerView:(MGCDayPlannerView*)view didSelectDayColumnCellAtDate:(NSDate *)date;
+
 /*!
 	@group Configuring appearance
  */

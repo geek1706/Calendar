@@ -133,7 +133,7 @@ static NSString* const EventCellsKey = @"EventCellsKey";
             rect.size.width = self.dayColumnSize.width;
             rect.size.height = fmax(self.minimumVisibleHeight, rect.size.height);
             
-            cellAttribs.frame = MGCAlignedRect(CGRectInset(rect , 0, 1));
+            cellAttribs.frame = MGCAlignedRect(CGRectInset(rect , 0, 0));
             cellAttribs.visibleHeight = cellAttribs.frame.size.height;
             cellAttribs.zIndex = 1;  // should appear above dimming views
             

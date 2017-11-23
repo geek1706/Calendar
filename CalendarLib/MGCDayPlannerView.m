@@ -758,6 +758,11 @@ static const CGFloat kMaxHourSlotHeight = 150.;
 			[weakSelf setTimedEventsViewContentOffset:offset animated:animated completion:completion];
 		}];
 	}
+    
+    [_dayColumnsView reloadData];
+    
+    NSInteger dateOffset = [self dayOffsetFromDate: date];
+    [_dayColumnsView selectItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:dateOffset] animated:NO scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
 }
 
 // public
@@ -928,7 +933,7 @@ static const CGFloat kMaxHourSlotHeight = 150.;
 		_dayColumnsView.showsHorizontalScrollIndicator = NO;
 		_dayColumnsView.decelerationRate = UIScrollViewDecelerationRateFast;
 		_dayColumnsView.scrollEnabled = NO;
-		_dayColumnsView.allowsSelection = NO;
+//        _dayColumnsView.allowsSelection = NO;
 		
 		[_dayColumnsView registerClass:MGCDayColumnCell.class forCellWithReuseIdentifier:DayColumnCellReuseIdentifier];
 	}
@@ -1047,6 +1052,10 @@ static const CGFloat kMaxHourSlotHeight = 150.;
 		NSIndexPath *path = [view indexPathForItemAtPoint:pt];
 		if (path)  // a cell was touched
 		{
+            if (view == _dayColumnsView) {
+                NSLog(@"_dayColumnsView");
+                return;
+            }
 			NSDate *date = [self dateFromDayOffset:path.section];
 			MGCEventType type = (view == self.timedEventsView) ? MGCTimedEventType : MGCAllDayEventType;
 			
@@ -1688,7 +1697,7 @@ static const CGFloat kMaxHourSlotHeight = 150.;
         [self addSubview:self.dayColumnsView];
     }
 
-    self.dayColumnsView.userInteractionEnabled = NO;
+//    self.dayColumnsView.userInteractionEnabled = NO;
     
     self.allDayEventsView.frame = CGRectMake(self.timeColumnWidth, self.dayHeaderHeight, timedEventsViewWidth, allDayEventsViewHeight);
     if (!self.allDayEventsView.superview) {
@@ -1719,6 +1728,8 @@ static const CGFloat kMaxHourSlotHeight = 150.;
 	}
 	
 	[self.allDayEventsView flashScrollIndicators];
+    
+    
 }
 
 #pragma mark - UIView
@@ -1895,6 +1906,7 @@ static const CGFloat kMaxHourSlotHeight = 150.;
     }
     
     dayCell.accessoryTypes = accessoryTypes;
+    
     return dayCell;
 }
 
@@ -2073,6 +2085,26 @@ static const CGFloat kMaxHourSlotHeight = 150.;
 //- (void)collectionView:(UICollectionView*)collectionView didEndDisplayingCell:(UICollectionViewCell*)cell forItemAtIndexPath:(NSIndexPath*)indexPath
 //{
 //}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    if (collectionView != _dayColumnsView) {
+        return;
+    }
+    NSDate *date = [self dateFromDayOffset:indexPath.section];
+    
+    MGCDayColumnCell *cell = (MGCDayColumnCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    cell.dayLabel.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.1];
+    
+    [self.delegate dayPlannerView:self didSelectDayColumnCellAtDate:date];
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
+    if (collectionView != _dayColumnsView) {
+        return;
+    }
+    MGCDayColumnCell *cell = (MGCDayColumnCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    cell.dayLabel.backgroundColor = [UIColor whiteColor];
+}
 
 // this is only supported on iOS 9 and above
 - (CGPoint)collectionView:(UICollectionView *)collectionView targetContentOffsetForProposedContentOffset:(CGPoint)proposedContentOffset

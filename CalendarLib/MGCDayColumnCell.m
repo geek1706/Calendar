@@ -32,7 +32,7 @@
 
 
 static const CGFloat dotSize = 4;
-static const CGFloat todayIndicatorSize = 2;
+static const CGFloat todayIndicatorSize = 3;
 
 
 @interface MGCDayColumnCell ()
@@ -109,13 +109,14 @@ static const CGFloat todayIndicatorSize = 2;
     self.accessoryTypes = MGCDayColumnCellAccessoryNone;
     self.markColor = [UIColor blackColor];
     [self setActivityIndicatorVisible:NO];
+    self.dayLabel.backgroundColor = [UIColor whiteColor];
 }
 
 - (void)layoutSubviews
 {
 	[super layoutSubviews];
 	
-	static CGFloat kSpace = 2;
+	static CGFloat kSpace = 0;
 
 	[CATransaction begin];
 	[CATransaction setDisableActions:YES];
@@ -123,7 +124,7 @@ static const CGFloat todayIndicatorSize = 2;
 	if (self.headerHeight != 0) {
 		CGSize headerSize = CGSizeMake(self.contentView.bounds.size.width, self.headerHeight);
 		CGSize labelSize = CGSizeMake(headerSize.width - 2*kSpace, headerSize.height - (2 * kSpace));
-		self.dayLabel.frame = (CGRect) { 2, 0, labelSize };
+		self.dayLabel.frame = (CGRect) { 0, 0, labelSize };
 		
 		self.dotLayer.position = CGPointMake(self.contentView.center.x, headerSize.height - 1.2 * dotSize);
 		self.dotLayer.fillColor = self.dotColor.CGColor;
@@ -173,6 +174,10 @@ static const CGFloat todayIndicatorSize = 2;
 {
     _accessoryTypes = accessoryTypes;
     [self setNeedsLayout];
+}
+
+- (void)setSelected:(BOOL)selected {
+    _dayLabel.backgroundColor = selected ? [[UIColor blackColor]colorWithAlphaComponent:0.1] : [UIColor whiteColor];
 }
 
 @end

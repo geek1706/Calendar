@@ -38,6 +38,7 @@ static CGFloat kSpace = 0;
 
 @property (nonatomic) UIView *leftBorderView;
 @property (nonatomic) UIView *rightBorderView;
+@property (nonatomic) UIView *bottomBorderView;
 @property (nonatomic) NSMutableAttributedString *attrString;
 
 @end
@@ -60,6 +61,10 @@ static CGFloat kSpace = 0;
         _rightBorderView = [[UIView alloc]initWithFrame:CGRectZero];
         _rightBorderView.backgroundColor = UIColorFromRGB(0xf1f1f1);
         [self addSubview:_rightBorderView];
+        
+        _bottomBorderView = [[UIView alloc]initWithFrame:CGRectZero];
+        _bottomBorderView.backgroundColor = UIColorFromRGB(0xf1f1f1);
+        [self addSubview:_bottomBorderView];
 	}
     return self;
 }
@@ -113,6 +118,7 @@ static CGFloat kSpace = 0;
 	[super layoutSubviews];
 	self.leftBorderView.frame = CGRectMake(0, 0, 2, self.bounds.size.height);
     self.rightBorderView.frame = CGRectMake(self.bounds.size.width - 1./[UIScreen mainScreen].scale, 0, 1./[UIScreen mainScreen].scale, self.bounds.size.height);
+    self.bottomBorderView.frame = CGRectMake(0, self.bounds.size.height -1./[UIScreen mainScreen].scale , self.bounds.size.width, 1./[UIScreen mainScreen].scale);
 	[self setNeedsDisplay];
 }
 
@@ -179,7 +185,9 @@ static CGFloat kSpace = 0;
 		[self.attrString.mutableString replaceOccurrencesOfString:@"\n" withString:@"  " options:NSCaseInsensitiveSearch range:NSMakeRange(0, self.attrString.length)];
 	}
 
-	[self.attrString drawWithRect:drawRect options:NSStringDrawingTruncatesLastVisibleLine|NSStringDrawingUsesLineFragmentOrigin context:nil];
+    CGFloat inset = 3;
+    
+	[self.attrString drawWithRect:CGRectInset(drawRect, inset, inset) options:NSStringDrawingTruncatesLastVisibleLine|NSStringDrawingUsesLineFragmentOrigin context:nil];
 }
 
 #pragma mark - NSCopying protocol
