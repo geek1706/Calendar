@@ -760,9 +760,12 @@ static const CGFloat kMaxHourSlotHeight = 150.;
 	}
     
     [_dayColumnsView reloadData];
-    
+
     NSInteger dateOffset = [self dayOffsetFromDate: date];
-    [_dayColumnsView selectItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:dateOffset] animated:NO scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:0 inSection:dateOffset];
+    if (indexPath.section < _dayColumnsView.numberOfSections) {
+        [_dayColumnsView selectItemAtIndexPath: indexPath animated:NO scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
+    }
 }
 
 // public
@@ -2104,6 +2107,13 @@ static const CGFloat kMaxHourSlotHeight = 150.;
     }
     MGCDayColumnCell *cell = (MGCDayColumnCell *)[collectionView cellForItemAtIndexPath:indexPath];
     cell.dayLabel.backgroundColor = [UIColor whiteColor];
+}
+
+- (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
+    if (collectionView != _dayColumnsView) {
+        return;
+    }
+
 }
 
 // this is only supported on iOS 9 and above
