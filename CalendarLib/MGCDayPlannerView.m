@@ -887,6 +887,8 @@ static const CGFloat kMaxHourSlotHeight = 150.;
 		UIPinchGestureRecognizer *pinch = [UIPinchGestureRecognizer new];
 		[pinch addTarget:self action:@selector(handlePinch:)];
 		[_timedEventsView addGestureRecognizer:pinch];
+        
+        _timedEventsView.tag = 1000;
 	}
 	return _timedEventsView;
 }
